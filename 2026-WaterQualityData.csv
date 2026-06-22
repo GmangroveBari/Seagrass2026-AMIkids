@@ -1,4 +1,4 @@
-Date,Team,Secchi (m),SamplingDepth (m),Temp (C),Salinity (ppt),pH
+Date,Team,Secchi-cm,SamplingDepth-cm,TempC,Salinity-ppt,pH
 5/22/2026,AMIkids,320,,,,
 6/12/2026,Manatee,260,0.8,86.6,18.5,
 6/12/2026,Dolphins,290,0.8,90.1,22.75,8.3
