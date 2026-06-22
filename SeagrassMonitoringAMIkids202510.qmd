@@ -1,5 +1,5 @@
 ---
-title: "Report: October 2025 Seagrass Monitoring Training"
+title: "Report: 2026 Seagrass Monitoring Training"
 subtitle: "Prepared for: AMIkids"
 author: "Gary E. Raulerson, Ph.D."
 project:
@@ -63,18 +63,18 @@ The project integrated Science, Technology, Engineering, and Mathematics (STEM) 
 
 **Methods and Materials**
 
-[Instructional workshops](https://docs.google.com/document/d/1lNSAIABPAdRw56UiYpi_fDJnMoSk4MEQW6SEBqg8sh4/edit?usp=sharing) were held daily from October 20-24, 2025. The classroom component occurred at the AMIkids Boatyard in northeast St. Petersburg, and the field component was held in seagrass flats approximately 2km southeast, on the eastern shore of Weedon Island County Park (@fig-map).
+[Instructional workshops](https://docs.google.com/document/d/1lNSAIABPAdRw56UiYpi_fDJnMoSk4MEQW6SEBqg8sh4/edit?usp=sharing) were held on various dates during 2026. The classroom component occurred at the AMIkids Boatyard in northeast St. Petersburg, and the field component was held in seagrass flats approximately 2km southeast, on the eastern shore of Weedon Island County Park (@fig-map). 
 
 ```{r}
 #| label: fig-map
-#| fig-cap: "Map showing October 2025 sampling area and proximity to AMIkids marina."
+#| fig-cap: "Map showing 2026 sampling area and proximity to AMIkids marina."
 #| fig-align: "center"
 
 
 df <- data.frame(
   lng = c(-82.596, -82.614),
   lat = c(27.854, 27.87),
-  site = c("Oct. 2025 Sampling Area", "AMIkids Marina")
+  site = c("May-June 2026 Sampling Area", "AMIkids Marina")
 )
 
 # Create the map using the data frame
@@ -91,9 +91,9 @@ df %>%
 
 ```
 
-A combination of approximately 10-30 students and adults attended each of the workshops. The students were from AMIkids programs in Hillsborough, Manatee, and Pinellas Counties. Adults were from several sponsoring companies, including Enterprise, Orlando Health, Palermo Real Estate Professionals, and Smith & Associates Real Estate, as well as representatives from regional agencies, AMIkids staff, and AMIkids volunteers. Instructors included AMIkids staff and a contractor.
+A combination of approximately 10 students and adults attended each of the workshops. The students were from AMIkids programs in Hillsborough and Pinellas Counties. Adults were volunteers from Enterprise (June 11 and Jabil (June 12), as well as AMIkids staff and volunteers. Instructors included AMIkids staff and a contractor.
 
-An instructional slide show was presented and gave background information on AMIkids, boat safety, and seagrass ecology. Transport was provided on the AMIkids flagship vessel, “Orlando’s Rose”, a 65-foot long landing craft jet-propelled boat.
+An instructional slide show was presented and gave background information on AMIkids, boat safety, and seagrass ecology. Transport was provided on the AMIkids flagship vessel, “Orlando’s Rose”, a 65-foot long landing craft jet-propelled boat. Due to shallow water conditions, participants were ferried from the Orlando's Rose to the seagrass flat via a pontoon boat.
 
 The seagrass assessment followed the quadrat protocol conducted by the Tampa Bay Estuary Program and its partners for annual transect monitoring ([TBEP 2020](https://tampabay.wateratlas.usf.edu/seagrass-monitoring/)). Before the Orlando’s Rose beached to disembark passengers, a Secchi disc measurement was taken at the bow of the ship.
 
@@ -106,18 +106,18 @@ Upon debarkation, the group was trained on the [seagrass monitoring protocol](ht
 -   Assessment of epiphytes
 -   Assessment of sediment
 
-The group was then divided into 2-4 teams that conducted quadrat assessments at a series of pre-established quadrats, or in one case (October 22, 2025), along a 100m transect. The quadrats were placed each day with no intention for repeated observations.
+The group was then divided into 2-4 teams that conducted quadrat assessments at a series of pre-established quadrats. The quadrats were placed each day with no intention for repeated observations.
 
 **Results**
 
-Each team completed 2-4 quadrats during the allotted time (approximately 1 hour). A Secchi reading, measured in over 3m water, ranged from 170-240cm and averaged 196cm over the 5-day period (@fig-Secchi). Depth of quadrats ranged from 23-118cm, with a mean depth of 60.6cm (@fig-depth) with the mean daily depth decreasing over the week. Sediment generally varied from sand to muddy sand, although instances of shelly sand and mud were observed (@tbl-sed).
+Each team completed 2-4 quadrats during the allotted time (approximately 1 hour). Secchi readings, measured in over 3m water, ranged from 260-320 cm and averaged xxx cm over the 5-day period (@fig-Secchi). Depth of quadrats ranged from XX-XXX cm, with a mean depth of xx.x cm (@fig-depth) with the mean daily depth decreasing over the week. Sediment generally varied from sand to muddy sand, although instances of shelly sand and mud were observed (@tbl-sed).
 
 ```{r}
 #| label: fig-Secchi
-#| fig-cap: "Secchi depths measured during October 2025."
+#| fig-cap: "Secchi depths measured during 2026."
 
 # create the secchi depth bar chart
-secchi <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/202510-AncillaryData.csv")
+secchi <- read.csv("https://raw.githubusercontent.com/GmangroveBari/Seagrass2026-AMIkids/refs/heads/main/2026-WaterQualityData.csv")
 
 
 #data summary and graph: day x secchi
@@ -134,21 +134,19 @@ ggplotly(secchi_fig)
 
 ```{r}
 #| label: fig-depth
-#| fig-cap: "Mean depths for October 2025 sampling events."
+#| fig-cap: "Mean depths for 2026 sampling events."
 #| fig-align: "center"
 
-
 # create the avg depth bar chart
-depth <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/202510-SeagrassDataAMIkidsConcatated.csv")
+depth <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
 
-
-#data summary and graph: day, species, and abundance
+#data summary and graph: date, species, and abundance
   Mean_Depth <- depth %>%
-    group_by(Day) %>%
+    group_by(Date) %>%
     summarise (AvgD = mean(Depth))
 
 # make a ggplot
-Depth_fig <- ggplot(Mean_Depth, aes(x = Day, y = AvgD)) + 
+Depth_fig <- ggplot(Mean_Depth, aes(x = Date, y = AvgD)) + 
   geom_bar(stat = 'identity', position = 'dodge') + geom_col(fill = "ORANGE")
 
 # convert to plotly
@@ -159,11 +157,10 @@ ggplotly(Depth_fig)
 #| label: tbl-sed
 #| tbl-cap: "Mean sediment scores for October 2025 sampling effort. Scores are objectively assessed  as follows: 1=Shelly sand, 2=Sand, 3=Muddy sand, 4=Mud, 5=Oysters."
 
-
-sed <- read_csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/202510-SeagrassDataAMIkidsConcatated.csv", col_select = c(Day, SedimentType))
+sed <- read_csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/2026-AMIkidsSeagrassClasses.csv", col_select = c(Day, SedimentType))
 
 mean_sed <- sed %>%
-    group_by(Day) %>%
+    group_by(Date) %>%
     summarise('Sediment Score' = mean(SedimentType))
 
 # Remove empty row
@@ -175,39 +172,39 @@ knitr::kable(mean_sed, format = "html", align = "cc", digits = 1) %>%
 
 ```
 
-Braun-Blanquet abundance varied both daily and within each day (@fig-BB). All three common seagrass species were recorded each day, with the exception that Turtle grass was not recorded on 10/21/25. Manatee grass (*Syringodium testudinum*) had the highest overall abundance of the three species (@tbl-means).
+Braun-Blanquet abundance varied both daily and within each day (@fig-BB). All three common seagrass species were recorded. Manatee grass (*Syringodium testudinum*) had the highest overall abundance of the three species (@tbl-means).
 
 ```{r}
 #| label: fig-BB
-#| fig-cap: "Braun-Blanquet Coverage at Weedon Island in October 2025."
+#| fig-cap: "Braun-Blanquet Coverage at Weedon Island in 2026."
 
-Seagrass1 <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/202510-SeagrassDataAMIkidsConcatated.csv")
+Seagrass1 <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
 
-#data summary and graph: day, species, and abundance
+#data summary and graph: date, species, and abundance
   mean_AbApp <- Seagrass1 %>%
-    group_by(Day, Species) %>%
+    group_by(Date, Species) %>%
     summarise(AvgAbu = mean(Abundance), AvgApp = mean(Appearance)) 
 
 #removing empty rows - no SAV observed  
   NoZeroAb <- mean_AbApp[apply(mean_AbApp!=0, 1, all),] %>% 
-    drop_na(Day, Species, AvgAbu)
+    drop_na(Date, Species, AvgAbu)
 
 #plotting abundance data in grouped bar chart
 NoZeroAb %>%
-  plot_ly(x = ~Day, y = ~AvgAbu, color = ~Species) %>%
+  plot_ly(x = ~Date, y = ~AvgAbu, color = ~Species) %>%
   add_bars() %>%
-  layout(barmode = "group",  xaxis = list(title = "Day in October 2025", showgrid=T),
+  layout(barmode = "group",  xaxis = list(title = "Date", showgrid=T),
          yaxis = list(title = "Braun-Blanquet Coverage"))
 
 ```
 
-Overall general appearance (@tbl-means), based on characteristics such as the amount of necrotic leaf material and broken edges, averaged between a score of 2 (good) and fair (3) for all species.
+Overall general appearance (@tbl-means), based on characteristics such as the amount of necrotic leaf material and broken edges, averaged between a score of 1 (excellent) and fair (3) for all species.
 
 ```{r}
 #| label: tbl-means
-#| tbl-cap: "Overall averages for several different seagrass metrics assessed from Oct. 20-25, 2025. Appearance and Epiphyte Density were scored on an objective scale from 1 (Excellent/None) to 5 (Poor/Heavy)."
+#| tbl-cap: "Overall averages for several different seagrass metrics assessed in 2026. Appearance and Epiphyte Density were scored on an objective scale from 1 (Excellent/None) to 5 (Poor/Heavy)."
 
-Table2a <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/202510-SeagrassDataAMIkidsConcatated.csv")
+Table2a <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
 
 # Create a custom summary table
 
@@ -238,56 +235,29 @@ knitr::kable(head(summary_table), digits = 1,  align = "lccccc")
 
 ```
 
-Estimates of epiphyte coverage varied widely over the week (@fig-epiphyte) but overall means were similar for all three species (@tbl-means).
+<<Update as needed>> Estimates of epiphyte coverage varied widely over the week (@fig-epiphyte) but overall means were similar for all three species (@tbl-means).
 
 ```{r}
 #| label: fig-epiphyte
-#| fig-cap: "Mean epiphyte density at Weedon Island in October 2025."
+#| fig-cap: "Mean epiphyte density at Weedon Island in 2026."
 
 
-Epiphyte <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/202510-SeagrassDataAMIkidsConcatated.csv")
+Epiphyte <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
 
 #plotting epiphyte data in grouped bar chart
-#data summary and graph: day, species, and abundance
+#data summary and graph: date, species, and abundance
   Mean_Epi <- Epiphyte %>%
-    group_by(Day, Species) %>%
+    group_by(Date, Species) %>%
     summarise(AvgEpi = mean(EpiphyteDensity))
 
 Mean_Epi %>%
-  plot_ly(x = ~Day, y = ~AvgEpi, color = ~Species) %>%
+  plot_ly(x = ~Date, y = ~AvgEpi, color = ~Species) %>%
   add_bars() %>%
-  layout(barmode = "group", xaxis = list(title = "Day in October 2025", showgrid=T),
+  layout(barmode = "group", xaxis = list(title = "Date", showgrid=T),
          yaxis = list(title = "Epiphyte density, graded from 1 (light) to 5 (heavy)"))
 
 ```
 
-Blade length measurements varied from a one-day mean of 10.3cm for Shoal grass (*Halodule wrightii*) on 10/22/25 to a mean of 34.1cm for Turtle grass on 10/24/25 (@fig-bldlen). Overall, Turtle grass and Manatee grass were similar in average blade length (30.0cm and 28.3cm, respectively), while Shoal grass was shorter (mean of 19.9cm)(@tbl-means).
-
-```{r}
-#| label: fig-bldlen
-#| fig-cap: "Mean blade lenghts at Weedon Island in October 2025."
-
-Epiphyte %>%
-  plot_ly(x = ~Day, y = ~AvgBld, color = ~Species) %>%
-  add_bars() %>%
-  layout(barmode = "group",  xaxis = list(title = "Day in October 2025", showgrid=T),
-         yaxis = list(title = "Blade length (cm)"))
-
-
-```
-
-Shoot counts were not done on the first day (10/20/2025). Shoot counts varied widely by day (@fig-shoot) and species (@tbl-means). Shoot counts were lower early in the week, and Manatee grass was estimated to have the highest shoot densities.
-
-```{r}
-#| label: fig-shoot
-#| fig-cap: "Mean shoot counts at Weedon Island in October 2025."
-
-
-Epiphyte %>%
-  plot_ly(x = ~Day, y = ~ShtDen, color = ~Species) %>%
-  add_bars() %>%
-  layout(barmode = "group",  xaxis = list(title = "Day in October 2025", showgrid=T),
-         yaxis = list(title = "Shoot density (#/m2)"))
 
 
 ```
