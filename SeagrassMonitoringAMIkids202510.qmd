@@ -64,7 +64,7 @@ The project integrated Science, Technology, Engineering, and Mathematics (STEM) 
 
 **Methods and Materials**
 
-[Instructional workshops](https://docs.google.com/document/d/1lNSAIABPAdRw56UiYpi_fDJnMoSk4MEQW6SEBqg8sh4/edit?usp=sharing) were held on various dates during 2026. The classroom component occurred at the AMIkids Boatyard in northeast St. Petersburg, and the field component was held in seagrass flats approximately 2km southeast, on the eastern shore of Weedon Island County Park (@fig-map). 
+[Instructional workshops](https://docs.google.com/document/d/1lNSAIABPAdRw56UiYpi_fDJnMoSk4MEQW6SEBqg8sh4/edit?usp=sharing) were held on various dates during 2026. The classroom component occurred at the AMIkids Boatyard in northeast St. Petersburg, and the field component was held in seagrass flats approximately 2km southeast, on the eastern shore of Weedon Island County Park (@fig-map).
 
 ```{r}
 #| label: fig-map
@@ -100,12 +100,12 @@ The seagrass assessment followed the quadrat protocol conducted by the Tampa Bay
 
 Upon debarkation, the group was trained on the [seagrass monitoring protocol](https://docs.google.com/document/d/1lNSAIABPAdRw56UiYpi_fDJnMoSk4MEQW6SEBqg8sh4/edit?usp=sharing). This included:
 
--   Depth measurement
--   Seagrass species identification
--   Braun-Blanquet coverage estimation
--   General appearance of seagrass
--   Assessment of epiphytes
--   Assessment of sediment
+- Depth measurement
+- Seagrass species identification
+- Braun-Blanquet coverage estimation
+- General appearance of seagrass
+- Assessment of epiphytes
+- Assessment of sediment
 
 The group was then divided into 2-4 teams that conducted quadrat assessments at a series of pre-established quadrats. The quadrats were placed each day with no intention for repeated observations.
 
@@ -120,12 +120,8 @@ Each team completed 2-4 quadrats during the allotted time (approximately 1 hour)
 # create the secchi depth bar chart
 secchi <- read.csv("https://raw.githubusercontent.com/GmangroveBari/Seagrass2026-AMIkids/refs/heads/main/2026-WaterQualityData.csv")
 
-
-#data summary and graph: day x secchi
-  mean_secchi <- secchi %>% group_by(Date) %>% summarise(AvgSec = mean(Secchi)) 
-
 # make a ggplot
-secchi_fig <- ggplot(mean_secchi, aes(x = Date, y = AvgSec)) + geom_bar(stat = 'identity', position = 'dodge') + geom_col(fill = "steelblue")
+secchi_fig <- ggplot(secchi, aes(x = Team, y = Secchi.cm)) + geom_bar(stat = 'identity', position = 'dodge') + geom_col(fill = "steelblue")
 
 # convert to plotly
 ggplotly(secchi_fig)
@@ -139,10 +135,11 @@ ggplotly(secchi_fig)
 #| fig-align: "center"
 
 # create the avg depth bar chart
-depth <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
+depth <- read.csv("https://raw.githubusercontent.com/GmangroveBari/Seagrass2026-AMIkids/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
 
 #data summary and graph: date, species, and abundance
-  Mean_Depth <- depth %>%
+  Mean_Depth <- depth %>% 
+    drop_na(Depth) %>%
     group_by(Date) %>%
     summarise (AvgD = mean(Depth))
 
@@ -158,14 +155,14 @@ ggplotly(Depth_fig)
 #| label: tbl-sed
 #| tbl-cap: "Mean sediment scores for October 2025 sampling effort. Scores are objectively assessed  as follows: 1=Shelly sand, 2=Sand, 3=Muddy sand, 4=Mud, 5=Oysters."
 
-sed <- read_csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/2026-AMIkidsSeagrassClasses.csv", col_select = c(Day, SedimentType))
+sed <- read.csv("https://raw.githubusercontent.com/GmangroveBari/Seagrass2026-AMIkids/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
 
 mean_sed <- sed %>%
     group_by(Date) %>%
     summarise('Sediment Score' = mean(SedimentType))
 
 # Remove empty row
-mean_sed <- mean_sed[-c(1), ]
+
 
 # Generate a markdown table
 knitr::kable(mean_sed, format = "html", align = "cc", digits = 1) %>%
@@ -179,7 +176,7 @@ Braun-Blanquet abundance varied both daily and within each day (@fig-BB). All th
 #| label: fig-BB
 #| fig-cap: "Braun-Blanquet Coverage at Weedon Island in 2026."
 
-Seagrass1 <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
+Seagrass1 <- read.csv("https://raw.githubusercontent.com/GmangroveBari/Seagrass2026-AMIkids/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
 
 #data summary and graph: date, species, and abundance
   mean_AbApp <- Seagrass1 %>%
@@ -205,7 +202,7 @@ Overall general appearance (@tbl-means), based on characteristics such as the am
 #| label: tbl-means
 #| tbl-cap: "Overall averages for several different seagrass metrics assessed in 2026. Appearance and Epiphyte Density were scored on an objective scale from 1 (Excellent/None) to 5 (Poor/Heavy)."
 
-Table2a <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
+Table2a <- read.csv("https://raw.githubusercontent.com/GmangroveBari/Seagrass2026-AMIkids/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
 
 # Create a custom summary table
 
@@ -236,14 +233,14 @@ knitr::kable(head(summary_table), digits = 1,  align = "lccccc")
 
 ```
 
-<<Update as needed>> Estimates of epiphyte coverage varied widely over the week (@fig-epiphyte) but overall means were similar for all three species (@tbl-means).
+\<<Update as needed>\> Estimates of epiphyte coverage varied widely over the year (@fig-epiphyte) but overall means were similar for all three species (@tbl-means).
 
 ```{r}
 #| label: fig-epiphyte
 #| fig-cap: "Mean epiphyte density at Weedon Island in 2026."
 
 
-Epiphyte <- read.csv("https://raw.githubusercontent.com/GmangroveBari/SeagrassOctober2025/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
+Epiphyte <- read.csv("https://raw.githubusercontent.com/GmangroveBari/Seagrass2026-AMIkids/refs/heads/main/2026-AMIkidsSeagrassClasses.csv")
 
 #plotting epiphyte data in grouped bar chart
 #data summary and graph: date, species, and abundance
@@ -259,9 +256,7 @@ Mean_Epi %>%
 
 ```
 
-
-
-```
+\`\`\`
 
 Comments provided with the data included observations of puffer fish, sponges, a horseshoe crab, a hermit crab, and shells.
 
@@ -271,55 +266,55 @@ Initial comments from students and volunteers indicate that this was a good expe
 
 There are several simple adjustments that can be made to the overall protocol to improve the experience and data resulting from the educational workshops. These include:
 
--   Ensuring that separate lines are used for different seagrass species within a single plot;
+- Ensuring that separate lines are used for different seagrass species within a single plot;
 
--   Providing the square size for short shoot analysis on the data sheet;
+- Providing the square size for short shoot analysis on the data sheet;
 
--   Identification of a method to allow the secchi disc to sink straight down
+- Identification of a method to allow the secchi disc to sink straight down
 
--   Ensuring that team composition and team names are clearly identified and used
+- Ensuring that team composition and team names are clearly identified and used
 
--   Standardization of seagrass species abbreviations (Tu=Turtle, Mn=Manatee, Sh=Shoal)
+- Standardization of seagrass species abbreviations (Tu=Turtle, Mn=Manatee, Sh=Shoal)
 
 **Future Project Components**
 
 The next major milestone established for this project is planting of seagrass in March 2026. However, multiple steps are necessary to successfully implement that event:
 
--   Continue teaching seagrass ecology & monitoring to youth in AMI-kids and adults from contributing companies;
+- Continue teaching seagrass ecology & monitoring to youth in AMI-kids and adults from contributing companies;
 
--   Identification of AMIkids volunteers to assist long-term with the ongoing work;
+- Identification of AMIkids volunteers to assist long-term with the ongoing work;
 
--   Identification of appropriate partners;
+- Identification of appropriate partners;
 
--   Identification of locations in Tampa Bay that are conducive to seagrass restoration efforts;
+- Identification of locations in Tampa Bay that are conducive to seagrass restoration efforts;
 
--   Permitting of those locations (unless permits have been received by other partnering entities);
+- Permitting of those locations (unless permits have been received by other partnering entities);
 
--   Identification of locations to acquire donor plants for installation, such as grow ponds or dredging operations;
+- Identification of locations to acquire donor plants for installation, such as grow ponds or dredging operations;
 
--   Creation and implementation of a monitoring plan for the restoration areas, including:
+- Creation and implementation of a monitoring plan for the restoration areas, including:
 
-    -   Introductory visits to all potential restoration sites;
+  - Introductory visits to all potential restoration sites;
 
-    -   A Before, After, Control, and Impact (BACI) analysis to ascertain the success rate
+  - A Before, After, Control, and Impact (BACI) analysis to ascertain the success rate
 
-    -   Identification of random, fixed, or transect plots to provide the most appropriate information;
+  - Identification of random, fixed, or transect plots to provide the most appropriate information;
 
-    -   Building a long-term monitoring team (composed of volunteers and professionals) that can document the changes in seagrass metrics for the restoration efforts;
+  - Building a long-term monitoring team (composed of volunteers and professionals) that can document the changes in seagrass metrics for the restoration efforts;
 
-    -   Reporting to partners and permit agencies;
+  - Reporting to partners and permit agencies;
 
--   Creation of a best practices for manual planting of SAV by volunteers;
+- Creation of a best practices for manual planting of SAV by volunteers;
 
--   Partnerships will be extremely important in this process, and should include but are not limited to:
+- Partnerships will be extremely important in this process, and should include but are not limited to:
 
-    -   Creation of partnerships within the region to complement the work;
+  - Creation of partnerships within the region to complement the work;
 
-    -   Coordination with technical partners;
+  - Coordination with technical partners;
 
-    -   Provide technical assistance for grant applications to appropriate agencies to upscale seagrass restoration work;
+  - Provide technical assistance for grant applications to appropriate agencies to upscale seagrass restoration work;
 
-    -   Support on-site visits, including field work with contributing organizations and AMIkids students.
+  - Support on-site visits, including field work with contributing organizations and AMIkids students.
 
 Additionally, there is long-term potential for project expansion through use of the AMIkids network of 50 locations in 6 states. There should be opportunities for all programs to restore and assess regional habitats, such as oysters, artificial reefs, salt marsh, freshwater wetlands, uplands, and exotic plants.
 
